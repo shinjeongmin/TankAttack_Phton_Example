@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TankMove : MonoBehaviourPunCallbacks
 {
@@ -15,6 +16,8 @@ public class TankMove : MonoBehaviourPunCallbacks
     private Transform tr;
     //키보드 입력값 변수
     private float h, v;
+
+    public TextMeshPro nickName;
 
     private void Start()
     {
@@ -29,6 +32,9 @@ public class TankMove : MonoBehaviourPunCallbacks
             Camera.main.GetComponent<FollowCam>().targetTr =
                 tr.Find("CamPivot").transform;
         }
+
+        // 닉네님 텍스트 메쉬프로에 photonView컴포넌트가 들어있는 오브젝트의 닉네임을 넣음.
+        nickName.text = photonView.Owner.NickName;
     }
 
     private void Update()

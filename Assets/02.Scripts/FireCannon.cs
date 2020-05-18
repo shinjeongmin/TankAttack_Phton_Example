@@ -32,17 +32,19 @@ public class FireCannon : MonoBehaviourPunCallbacks
             //마우스 왼쪽버튼 클릭 시 발사 로직 수행
             if (Input.GetMouseButtonDown(0))
             {
-                Fire();
+                photonView.RPC("Fire", RpcTarget.AllViaServer, null);
             }
         }
     }
 
+    [PunRPC]
     void Fire()
     {
         //발사 사운드 발생
         sfx.PlayOneShot(fireSfx, 1.0f);
-        PhotonNetwork.Instantiate("Cannon"
-            , firePos.position
-            , firePos.rotation);
+        Instantiate(cannon, firePos.position, firePos.rotation);
+        //PhotonNetwork.Instantiate("Cannon"
+        //    , firePos.position
+        //    , firePos.rotation);
     }
 }
